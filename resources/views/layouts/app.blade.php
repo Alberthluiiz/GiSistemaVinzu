@@ -10,29 +10,52 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
 </head>
 <body class=" bg-light ">
-        {{-- p -> Padding espacio del cuador --}}
-    <header class="p-4 border-b shadow" style="background: rgb(17, 14, 95)">
-        <div class="container mx-auto d-flex justify-content-between align-items-center">
-          <h1 class="fs-7 font-weight-bold text-white mr-auto">
-            VinZu 1.0
-          </h1>
-      {{-- gap-4 -> damos espacion entre ambas etiquetas --}}
-          <nav class="ml-auto d-flex gap-4">
-            <a  href="{{route('login.index')}}"
-            class="font-weight-bold 
-            text-uppercase text-white 
-            text-sm-center 
-            text-decoration-none">Iniciar Sesión</a>
+        
 
-            <a href="{{route('register.index')}}"
+  <nav class="flex py-4 bg-indigo-500 text-white rounded">
+    <div class="px-12 mr-auto d-flex align-items-center">
+      <p class="font-bold" style="font-size: 35px">VinZu 1.0</p>
+    </div>
+    <ul class="w-1/2 px-16 ml-auto flex justify-end pt">
+      {{-- Si esta iniciado sesion muestra la siguiente pantalla --}}
+      @if(auth()->check())
+      <li class="mx-4">
+        <p style="font-size: 18"> Bienvenido <b> {{ auth()->user()->name }} </b></p>
+            
+      </li>
+      <li class="d-flex align-items-center">
+            <a  href="{{ route('login.destroy')}}"
             class="font-weight-bold 
-            text-uppercase text-white 
             text-sm-center 
-            {{-- Remplazamos el href="register" por un gelper de laravel {{}} --}}
-            text-decoration-none">Crear Cuenta</a>
-          </nav>
-        </div>
-      </header>
+            text-white
+            text-decoration-none"
+            style="font-size: 18px"
+            >Salir</a>
+      </li>
+      @else
+      <li class="mx-4 d-flex align-items-center">
+        <a  href="{{route('login.index')}}"
+            class="font-weight-bold 
+            text-sm-center 
+            text-white
+            text-decoration-none"
+            style="font-size: 18px"
+            >Iniciar Sesión</a>
+            
+      </li>
+      <li class="d-flex align-items-center">
+            <a  href="{{route('register.index')}}"
+            class="font-weight-bold 
+            text-sm-center 
+            text-white
+            text-decoration-none"
+            style="font-size: 18px"
+            >Registrarse</a>
+      </li>
+      @endif
+    </ul>
+  </nav>
+  
 
 
     @yield('contenido')
@@ -42,3 +65,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+
+{{-- 
+@if (auth()->check())
+gap-4 -> damos espacion entre ambas etiquetas
+<nav class="ml-auto d-flex gap-4">
+  <p class="text-xl">Bienvenido <b> {{ auth()->user()->name }} </b></p>
+
+  <a href="#">Salir</a>
+</nav>
+@else
+gap-4 -> damos espacion entre ambas etiquetas
+<nav class="ml-auto d-flex gap-4">
+  <a  href="{{route('login.index')}}"
+  class="font-weight-bold 
+  text-uppercase text-white 
+  text-sm-center 
+  text-decoration-none">Iniciar Sesión</a>
+
+  <a href="{{route('login.index')}}"
+  class="font-weight-bold 
+  text-uppercase text-white 
+  text-sm-center 
+  Remplazamos el href="register" por un gelper de laravel {{}}
+  text-decoration-none">Crear Cuenta</a>
+</nav>
+@endif --}}

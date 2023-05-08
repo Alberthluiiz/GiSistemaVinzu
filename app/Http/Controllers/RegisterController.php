@@ -12,6 +12,8 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
+
+    /* validacion de nombre usuario contraseña */
     public function store()
     {
         $user = User::create(request(['name', 'email', 'password']));

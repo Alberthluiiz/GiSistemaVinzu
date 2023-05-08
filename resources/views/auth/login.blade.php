@@ -5,9 +5,11 @@
 @section('contenido')
 
 <div class="block mx-auto my-12 p-8 bg-white w-1/3 border-gray-200 rounded-ls shadow-lg">
-    <h1 class="text-5x1 text-center font-bold"> Login</h1>
+    <h1 class="text-5x1 text-center font-bold"> Login </h1>
 
     <form class="mt-4 rounded-circle" method="POST" action="">
+        @csrf
+        
         {{-- Email --}}
         <input 
         type="email" 
@@ -15,6 +17,11 @@
         placeholder="Nombre" 
         id="email"
         name="email">
+        {{-- Mensaje de error autenticacion --}}
+        @error('message')
+        <p class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2">
+        Correo electronico incorrecto</p>
+        @enderror
 
         {{-- Contraseña --}}
         <input 
@@ -23,18 +30,16 @@
         placeholder="Contraseña" 
         id="password"
         name="password">
-
-        {{-- Error --}}
-        {{-- <p
-        class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2"
-        >Contraseña incorrecta</p> --}}
+        {{-- Mensaje de error autenticacion --}}
+        @error('message')
+        <p class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2">
+        Contraseña incorrecta</p>
+        @enderror
 
         {{-- Boton Log In --}}
-        <button 
-        type="submit"
-        class=" rounded-md bg-indigo-500 w-full text-lg text-white font-semibold p-2 my-3 hover:bg-indigo-600 focus:bg-indigo"        
-        >Iniciar Sesión</button>
-
+        <button type="submit"
+        class=" rounded-md bg-indigo-500 w-full text-lg
+        text-white font-semibold p-2 my-3 hover:bg-indigo-600">Iniciar Sesión</button>
     </form>
 </div>
     
